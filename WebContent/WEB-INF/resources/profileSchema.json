@@ -1,0 +1,98 @@
+{
+
+	"$schema" : "http://json-schema.org/draft-06/schema#",
+	"title" : "User Schema",
+	"description" : "Contains information about the user",
+	"type" : "object",
+
+	"properties" : {
+		"objectId" : { 
+			"type" : "string",
+			"pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$" 
+		},
+		"_id" : { 
+			"type" : "string",
+			"pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$" 
+		},
+		"objectType" : { 
+			"type" : "string",
+			"enum" : [ "profile" ]
+		},
+		"_type" : {
+			"type" : "string",
+			"enum" : [ "profile" ]
+		},
+		"firstName" : { "type" : "string" },
+		"lastName" : { "type" : "string" },
+		"age" : {
+			"type" : "number",
+			"minimum" : 18 
+		},
+		"email" : { 
+			"type" : "string",
+			"pattern" : "^[a-z0-9]+(([.]?[a-z0-9]){5,})?@g(oogle)?mail.com$" 
+		},
+		"password" : {
+			"type" : "string",
+			"minlength" : 8
+		},
+		"contact" : { 
+			"type" : "string",
+			"pattern" : "^[1-9][0-9]{9}$" 
+		},
+		"address" : { 
+			"type" : "object",
+			"properties" : {
+				"_id" : { "type" : "string" },
+				"objectId" : { "type" : "string" },
+				"_type" : { 
+					"type" : "string",
+					"enum" : [ "profileAddress" ] 
+				},
+				"objectType" : {  
+					"type" : "string",
+					"enum" : [ "profileAddress" ]
+				},
+				"street" : { "type" : "string" },
+				"city" : { "type" : "string" },
+				"state" : { 
+					"type" : "string",
+					"enum" : [ "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA",
+													"KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM",
+													"NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA",
+													"WV", "WI", "WY" ] 
+				}
+			},
+			"required" : [ "street", "city", "state" ]
+		},
+		"ssn" : { "type" : "number" },
+		"role" : { 
+			"type" : "string", 
+			"enum" : [ "USER", "ADMIN" ] 
+		},
+		"subscribedPlans" : {
+			"type" : "array",
+			"items" : {
+				"type" : "object",
+				"properties" : {
+					"planId" : { 
+						"type" : "string" 
+					},
+					"startDate" : {
+						"type" : "string"
+					},
+					"endDate" : {
+						"type" : "string"
+					}
+				},
+				"required" : [ "planId", "startDate", "endDate" ],
+				"uniqueItems" : true
+			}
+		},
+		"creationDate" : { "type" : "string", "format" : "date-time" },
+		"lastModifiedDate" : { "type" : "string", "format" : "date-time" }
+	},
+	
+	"required" : [ "firstName", "lastName", "email", "password", "contact", "address", "ssn", "age", "role"],
+	"additionalProperties" : false
+}

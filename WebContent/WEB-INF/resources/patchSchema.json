@@ -1,0 +1,27 @@
+{
+	"$schema" : "http://json-schema.org/draft-06/schema#",
+	"title" : "Patch Schema",
+	"description" : "Contains information about patch data",
+	"type" : "array",
+
+	"items" : {
+		"type" : "object",
+		"properties" : {
+			"op" : {
+				"type" : "string",
+				"enum" : [ "replace" ]
+			},
+			"path" : {
+				"type" : "string",
+				"pattern" : "(\/(plan|profile)\/([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})(.[A-Za-z]+)?\/[A-Za-z]+$)"
+			},
+			"value" : {
+				"type" : "string"
+			}
+		},
+		"required" : [ "op", "path", "value" ],
+		"additionalProperties" : false
+	},
+  
+  "minItems" : 1
+}

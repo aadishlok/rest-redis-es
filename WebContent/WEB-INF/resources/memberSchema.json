@@ -1,0 +1,24 @@
+{
+	"$schema" : "http://json-schema.org/draft-06/schema#",
+	"title" : "Member Schema",
+	"description" : "Contains user information and the plan subscribed for with duration and payment details.",
+	"type" : "object",
+
+	"properties" : {
+		"user" : { "$ref" : "userSchema.json/definitions" },
+		"plan" : { "$ref" : "planSchema.json/definitions" },
+		"id" : { "type" : "string" },
+		"_id" : { "type" : "string" },
+		"username" : { "type" : "string" },
+		"type" : { "type" : "number" },
+		"_type" : { "type" : "number" },
+		"policyNumber" : { "type" : "number" },
+		"effectiveDate" : { "type" : "date-time" },
+		"terminationDate" : { "type" : "date-time" },
+		"payment" : { "type" : "number" },
+		"currency" : { "type" : "string" }
+	},
+
+	"required" : [ "user", "plan", "policyNumber", "effectiveDate", "terminationDate", "payment", "currency" ],
+	"additionalProperties" : false
+}
